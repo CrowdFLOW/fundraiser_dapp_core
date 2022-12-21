@@ -2,6 +2,7 @@
 
 
 pub contract FFMBadge : NonFungibleToken{
+    // The Non Fungible Tokens that will be awarded as proof of patronage to donors
     pub var totalSupply: UInt64
     
     pub event Deposit(id: UInt64, to: Address?)

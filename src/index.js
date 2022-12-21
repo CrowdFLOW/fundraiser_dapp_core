@@ -15,16 +15,14 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 reportWebVitals();
 
 
 
 
 async function reward(address){
-  
+    // This method is used to send the NFTs to donors depending on the size of their donation
     console.log("%cSigning Transaction", `color: teal`);
   
     // Our Cadence code. Notice the use of alias here
@@ -70,6 +68,8 @@ async function reward(address){
     console.log({ txDetails });
 }
 
+// Since FLOW requires vault creation even to be able to receive an NFT, we use
+// the registry method to be called by donors to setup the vault.
 async function getRegistered() {
   console.log(process.env.REACT_APP_STATUS);
   if (process.env.REACT_APP_STATUS != "1"){

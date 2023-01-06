@@ -12,9 +12,11 @@ pub contract FFMBadge : NonFungibleToken{
     pub  resource NFT: NonFungibleToken.INFT {
         pub let id: UInt64 
         pub let uri: String
+        pub let tier: String
         init() {
             self.id = FFMBadge.totalSupply
             self.uri = "https://www.google.com/search?q=bronze+card&client=ubuntu&hs=nJt&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjE2M70nYj7AhXH7zgGHYSrD0gQ_AUoAXoECAIQAw&biw=1526&bih=763&dpr=1#imgrc=_ou7KayMksl65M"
+            self.tier = "bronze"
             FFMBadge.totalSupply = FFMBadge.totalSupply + (1 as UInt64)
         }
         

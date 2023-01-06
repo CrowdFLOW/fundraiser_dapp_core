@@ -23,9 +23,10 @@ reportWebVitals();
 
 async function reward(address){
     // This method is used to send the NFTs to donors depending on the size of their donation
+    // The nature of rewarded NFTs is covered in the nft_randomizer repository
     console.log("%cSigning Transaction", `color: teal`);
   
-    // Our Cadence code. Notice the use of alias here
+    
     const cadence = `
       import NonFungibleToken from 0xNFT
       import FFMBadge from 0xFFM
@@ -95,7 +96,7 @@ async function getRegistered() {
     }
     }
   `;
-    const args = [];//(arg, t) => [arg(recepient, t.Address), arg(amount, t.UFix64)];
+    const args = [];
     const limit = 500;
 
     const txId = await mutate({ cadence, args, limit });

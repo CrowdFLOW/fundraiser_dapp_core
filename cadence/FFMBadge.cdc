@@ -12,12 +12,61 @@ pub contract FFMBadge : NonFungibleToken{
     pub  resource NFT: NonFungibleToken.INFT {
         pub let id: UInt64 
         pub let uri: String
-        pub let tier: String
+        pub var tier: String
         init() {
             self.id = FFMBadge.totalSupply
             self.uri = "https://www.google.com/search?q=bronze+card&client=ubuntu&hs=nJt&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjE2M70nYj7AhXH7zgGHYSrD0gQ_AUoAXoECAIQAw&biw=1526&bih=763&dpr=1#imgrc=_ou7KayMksl65M"
             self.tier = "bronze"
             FFMBadge.totalSupply = FFMBadge.totalSupply + (1 as UInt64)
+        }
+
+        pub fun promote(newTier: String){
+            var nRank = 0
+            var cRank = 0
+            switch newTier{
+                case "Bronze": 
+                    nRank = 1
+                
+                case "Silver": 
+                    nRank = 2
+                
+                case "Gold": 
+                    nRank = 3
+                
+                default: 
+                    nRank = 4
+                
+            }
+            switch self.tier{
+                case "Bronze": 
+                    cRank = 1
+                
+                case "Silver": 
+                    cRank = 2
+                
+                case "Gold": 
+                    cRank = 3
+                
+                default: 
+                    cRank = 4
+                
+            }
+            if (cRank < nRank){
+                switch newTier{
+                    case "Bronze": 
+                        self.tier = "Bronze"
+                    
+                    case "Silver": 
+                        self.tier = "Silver"
+                    
+                    case "Gold": 
+                        self.tier = "Gold"
+                    
+                    default: 
+                        self.tier = "Platinum"
+                    
+                }
+            }
         }
         
     }
@@ -39,6 +88,8 @@ pub contract FFMBadge : NonFungibleToken{
         pub fun getIDs(): [UInt64]{
             return self.ownedNFTs.keys
         }
+
+        
 
         pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT {
             return (&self.ownedNFTs[id] as &NonFungibleToken.NFT?)!
